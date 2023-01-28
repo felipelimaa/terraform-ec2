@@ -42,3 +42,8 @@ resource "aws_security_group" "ec2_use1_sec_group_web" {
         Name = "${data.aws_iam_user.user.user_name}-${data.aws_region.current.name}-sec-group-web"
     }
 }
+
+resource "aws_network_interface_sg_attachment" "ec2_use1_sec_group_attach" {
+    security_group_id       = aws_security_group.ec2_use1_sec_group_web.id
+    network_interface_id    = aws_instance.ec2-use1-instance.primary_network_interface_id
+}
